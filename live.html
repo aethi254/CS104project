@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        LIVE MATCH
+    </title>
+    <link rel="stylesheet" href="live.css">
+    <script src="score.js"></script>
+</head>
+<body>
+    <h1>LIVE SCORE</h1>
+    <button id="undo" style="position: absolute; top: 10px; right: 10px;">UNDO ↩️</button>
+    <p id="innings"></p><br>
+    <p id="overallscore"></p><br>
+    <table id="batting">
+        <tr>
+            <th>Batter</th>
+            <th>Runs</th>
+            <th>Balls</th>
+            <th>4s</th>
+            <th>6s</th>
+            <th>Strike Rate</th>
+        </tr>
+        <tr>
+            <td id="strikename"></td>
+            <td id="strikeruns"></td>
+            <td id="strikeballs"></td>
+            <td id="strike4s"></td>
+            <td id="strike6s"></td>
+            <td id="strikestrikerate"></td>        
+        </tr>
+        <tr>
+            <td id="nonstrikename"></td>
+            <td id="nonstrikeruns"></td>
+            <td id="nonstrikeballs"></td>
+            <td id="nonstrike4s"></td>
+            <td id="nonstrike6s"></td>
+            <td id="nonstrikestrikerate"></td>        
+        </tr>
+    </table>
+    <table id="bowling">
+        <tr>
+            <th>Bowler</th>
+            <th>Overs</th>
+            <th>Maidens</th>
+            <th>Runs Conceded</th>
+            <th>Wickets</th>
+            <th>Economy Rate</th>
+        </tr>
+        <tr>
+            <td id="bowlername"></td>
+            <td id="bowlerovers"></td>
+            <td id="bowlermaidens"></td>
+            <td id="bowlerrunsconceded"></td>
+            <td id="bowlerwickets"></td>
+            <td id="bowlereconomyrate"></td>
+        </tr>
+    </table>
+    <div id="scoringbuttons">
+        <div class="button-row">
+            <button type="button" id="dot">Dot 🔵</button>
+            <button type="button" id="one">One 1️⃣</button>
+            <button type="button" id="two">Two 2️⃣</button>
+        </div>
+        <div class="button-row">
+            <button type="button" id="three">Three 3️⃣</button>
+            <button type="button" id="four">Four 4️⃣</button>
+            <button type="button" id="six">Six 6️⃣</button>
+        </div>
+        <div class="button-row">
+            <button type="button" id="wide">Wide ↔️</button>
+            <button type="button" id="noball">No Ball ❌</button>
+            <button type="button" id="byes">Byes 🏃</button>
+        </div>
+        <div class="button-row last-row">
+            <button type="button" id="wicket">Wicket 🎯</button>
+            <button type="button" id="runout">Run Out 🏏</button>
+        </div>
+    </div>
+    <button id="Livecommentary">LIVE COMMENTARY 🎙️</button><br>
+    <button id="fullscorecard">FULL SCORECARD 📊</button><br>
+</body>
+</html>

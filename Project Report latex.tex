@@ -1,0 +1,170 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage{geometry}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\geometry{margin=1in}
+\usepackage{parskip}
+\setlength{\parindent}{0pt}
+
+\title{Howzatt! Cricket Scorekeeper \\ \large A Web-Based Live Scoring Application}
+\author{Project Report}
+\date{April 2025}
+
+\begin{document}
+
+\maketitle
+\hrule
+\vspace{1cm}
+
+\section*{Overview}
+
+\textit{Howzatt! Cricket Scorekeeper} is a comprehensive, web-based cricket scoring application developed with HTML, CSS, and JavaScript. It offers real-time ball-by-ball scoring, maintains detailed player statistics, provides a live commentary feed, and generates match summaries with results. All application logic is centralized in \texttt{score.js} and match data is persisted via \texttt{localStorage}.
+
+\vspace{0.5cm}
+
+\section*{1. Setup Page}
+
+\textbf{Files Used}: \texttt{setup.html}, \texttt{setup.css}, \texttt{score.js}
+
+\textbf{Purpose}: Initialize match parameters and prepare the scoring session.
+
+\textbf{Features}:
+\begin{itemize}
+  \item Text inputs for Team 1 and Team 2 names.
+  \item Dropdown menu to select the toss-winning team.
+  \item Dropdown menu to choose toss decision (Bat or Bowl).
+  \item \textbf{Start Match} button: validates inputs, stores match details in \texttt{localStorage}, and navigates to \texttt{live.html}.
+  \item \textbf{Reset All Player Statistics} button: clears any existing player stats from previous sessions.
+\end{itemize}
+
+\textbf{UI Design}: A centered, minimalist form with clear headings and buttons, styled in \texttt{setup.css}.
+
+\vspace{0.5cm}
+
+\section*{2. Live Match Scoring Interface}
+
+\textbf{Files Used}: \texttt{live.html}, \texttt{live.css}, \texttt{score.js}
+
+\textbf{Purpose}: Enable dynamic entry of each ball's outcome and update match status instantly.
+
+\textbf{Displayed Information}:
+\begin{itemize}
+  \item Current innings indicator (e.g., "First Innings" or "Second Innings").
+  \item Overall scoreline: runs/wickets and overs bowled.
+  \item Striker and non-striker tables: Runs, Balls Faced, 4s, 6s, Strike Rate.
+  \item Current bowler's table: Overs, Maidens, Runs Conceded, Wickets, Economy Rate.
+\end{itemize}
+
+\textbf{Interactive Controls}:
+\begin{itemize}
+  \item Run buttons: Dot, 1, 2, 3, 4, 6.
+  \item Extras: Wide, No Ball, Byes (handled per cricket rules).
+  \item \textbf{Wicket} button: prompts for next batter's name and logs wicket event.
+  \item \textbf{Run Out} button: prompts for number of runs completed before dismissal.
+  \item Automatic strike rotation on odd runs.
+  \item End-of-over prompt to enter new bowler's name.
+  \item Navigation to \textbf{Live Commentary} (\texttt{livecom.html}) and \textbf{Full Scorecard} (\texttt{scorecard.html}).
+\end{itemize}
+
+\textbf{Special Rules Implemented}:
+\begin{itemize}
+  \item Extras scoring: wides and no-balls add runs without counting balls; byes increment extras and balls.
+  \item Current Run Rate (CRR) and Required Run Rate (RRR) are calculated during the chase.
+  \item Each ball's event is recorded for commentary feed.
+\end{itemize}
+
+\vspace{0.5cm}
+
+\section*{3. Scorecard Page}
+
+\textbf{Files Used}: \texttt{scorecard.html}, \texttt{scorecard.css}, \texttt{score.js}
+
+\textbf{Purpose}: Display a full summary of batting and bowling performances for both innings.
+
+\textbf{Features}:
+\begin{itemize}
+  \item Batting scorecards for First and Second Innings: lists all batters (out or not out) with their Runs, Balls, 4s, 6s, and Strike Rate.
+  \item Bowling scorecards for both innings: lists all bowlers with Overs, Maidens, Runs Conceded, Wickets, and Economy Rate.
+  \item \textbf{Return to Live Score} button to resume scoring.
+\end{itemize}
+
+\textbf{Data Binding}: Reads stored JSON objects from \texttt{localStorage} and dynamically populates table rows.
+
+\vspace{0.5cm}
+
+\section*{4. Live Commentary Page}
+
+\textbf{Files Used}: \texttt{livecom.html}, \texttt{livecom.css}, \texttt{score.js}
+
+\textbf{Purpose}: Provide a ball-by-ball textual log of the match.
+
+\textbf{Features}:
+\begin{itemize}
+  \item Header indicating current innings and over.
+  \item Paragraph element that appends each ball's commentary string (e.g., "2.3 Bumrah to Kohli, 4 runs").
+  \item Filter functionality: clicking a player's name in tables filters commentary by that player (optional enhancement).
+  \item \textbf{Return to Live Score} button.
+\end{itemize}
+
+\textbf{Storage}: Commentary entries are stored in an array in \texttt{localStorage} and rendered on page load.
+
+\vspace{0.5cm}
+
+\section*{5. Match Summary Page}
+
+\textbf{Files Used}: \texttt{summary.html}, \texttt{summary.css}, \texttt{score.js}
+
+\textbf{Purpose}: Calculate and display the final outcome once the match concludes.
+
+\textbf{Outcome Logic}:
+\begin{itemize}
+  \item If Team batting first has more runs than second innings total: display "\textit{Team A wins by X runs!}"
+  \item If Team chasing reaches target: display "\textit{Team B wins by Y wickets (Z balls remaining)!}"
+\end{itemize}
+
+\textbf{Additional Controls}:
+\begin{itemize}
+  \item Displays the final aggregate scoreline (e.g., "61/3 (2.0 ov) vs. 60/5 (2.0 ov)").
+  \item \textbf{Start New Match} button clears \texttt{localStorage} and redirects to \texttt{setup.html}.
+\end{itemize}
+
+\vspace{0.5cm}
+
+\section*{Storage Mechanism}
+
+All match data—team names, player stats, ball-by-ball logs, and summary—is stored as JSON in \texttt{localStorage}. This ensures data persistence across page navigations and browser refreshes.
+
+\vspace{0.5cm}
+
+\section*{Customizations}
+
+Optional enhancements implemented or possible:
+\begin{itemize}
+  \item Support for wides, no-balls, byes, and leg-byes, each following official scoring rules. Also customized to handle the cases where some extra runs can be scored on these events.
+  \item Run Out handling with intermediate run count. Also manages strike handling depending upon which end the runout was made and whether the batters crossed during the runout.
+  \item Live commentary with filtering by batter or bowler. Live commentary also handles over changes, innings changes, wickets, new batters and all.
+  \item Multi-match statistics archive stored in \texttt{localStorage}. The career stats (either batting or bowling) of any player can be accessed by clicking on the player's name on the scorecard page. Also there is a button to clear all player statistics from the local storage on the setup page.
+  \item The scorecard page shows the batting and bowling scorecards for both innings. The scorecards are displayed in a tabular format with all the relevant statistics for each player.
+  \item Extendable to longer formats by adjusting overs and innings logic.
+  \item The live page shows the current run rate and required run rate for the chasing team along with the number of runs required and the number of balls left.
+  \item Implemented the undo button logic which is very important functionality in case of such apps. There is an undo button on the live.html which undos your action in case any wrong button is pressed.
+  \item The design is based on a single theme and includes background images to make it look similar to apps such as cricbuzz.
+  \item Very minute things are handled in this code. For example, a bowler cannot bowl two consecutive overs. Also, there exists the logic to accept the extra runs input on no-ball, wide and byes. Also, in the case of runout, strike management is done depending on whether the batters crossed before runout and which end was the runout done.
+\end{itemize}
+
+\vspace{0.5cm}
+
+\section*{References}
+
+\begin{itemize}
+  \item \href{https://www.freecodecamp.org/news/web-storage-localstorage-vs-sessionstorage-in-javascript/}{FreeCodeCamp: LocalStorage vs SessionStorage}
+  \item Cricbuzz and ESPN Cricinfo for design inspiration.
+\end{itemize}
+
+\vspace{0.5cm}
+
+\section*{Conclusion}
+
+\textit{Howzatt! Cricket Scorekeeper} delivers a user-friendly live scoring solution, capturing every aspect of even a multi-over match. Its modular design, centralized logic in \texttt{score.js}, and use of \texttt{localStorage} make it robust, maintainable, and easy to extend for future formats and features.
+
+\end{document}

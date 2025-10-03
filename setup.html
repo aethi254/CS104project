@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="setup.css">
+    <title>
+        howzatt!
+    </title>
+</head>
+<body>
+    <div class="centering">
+    <h1>WELCOME TO HOWZATT!</h1>
+    <form>
+        <fieldset>
+            <legend><h2>START A LIVE MATCH</h2></legend>
+            <label for="TEAM1"><h4>Enter Team 1:</h4></label>
+            <input type="text" id="TEAM1" name="TEAM 1"><br>
+            <label for="TEAM2"><h4>Enter Team 2:</h4></label>
+            <input type="text" id="TEAM2" name="TEAM 2"><br>
+            <label for="teamSelect">TOSS:</label>
+            <select id="teamSelect" name="team">
+            <option value="team1">Team 1</option>
+            <option value="team2">Team 2</option>
+            </select>
+            <br>
+            <label for="teamdecision">DECIDED TO:</label>
+            <select id="teamdecision" name="decision">
+            <option value="bat">BAT</option>
+            <option value="bowl">BOWL</option>
+            </select>
+            <br>
+            <button type="button" id="startmatchbutton"><h3>START MATCH</h3></button>
+            <button id="resetStatsButton" type="button">Reset All Player Statistics</button>
+        </fieldset>
+    </form>
+    </div>
+    <script src="score.js"></script>
+</body>
+</html>
